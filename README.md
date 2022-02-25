@@ -7,58 +7,46 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## About Login Temperatures App
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This is a small webapp that will store the current temperature of two cities when a user logs in, and display a historical list of the users login temperatures.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Used Technologies
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Backend API - Laravel 8
+- Front-end - Vue.js
+- SQLite
+- Open Weather API
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Overview
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+This app build as a single page application (SPA). Because of this is a simple SPA(single page applications), I used Laravel Sanctum for API Token Authentication. Sanctum is one of most popular official packages of Laravel. Laravel Sanctum provides a simple authentication system for SPAs (single page applications) and simple token-based APIs.I tried to follow Laravel service pattern for this project. Because this app based on a single service. In this app I used Open Weather API to fetch current temperature data and sync with our database. To do this process I created this re-usable service class. This service class can use to do the data sync process anywhere in app by simply dependency inject it into controller methods. Using this technique, we can move MVC pattern to another layer by extending logic to service class. It I’ll help to improve readability, reusability and keep clean our controllers. For API calls I used Laravel default HTTP helper method. I created common helper function for API calls. Using this function, we can simply get API responses by passing URL and return type(json,body,etc) as parameters . In database structure I used three tables for Users, Cities and weather data. I used Laravel eloquent ORM for interact with my database. For primary and foreign key mappings, I used eloquent relationships to map and retrieve data form data base. When retrieving data, I used eager loading method to load relationships for efficiency and to avoid popular N+ problem in Laravel.
 
-## Laravel Sponsors
+## set up instructions 
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+- clone project using github
+- create ‘.env’ file and copy & pase all data inside config_files/env data.txt to .env file
+- run ‘composer update’ command
+- run ‘composer update’ command
+- run ‘composer dump-autoload’ command
+- run ‘php artisan migrate’ command
+- run ‘npm install && npm run dev’ command
 
-### Premium Partners
+## data base set up instructions 
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+create new database in local machine and set DB data in .env file
 
-## Contributing
+- If you like to use fresh db,
+    - run ‘php artisan migrate’ command and register as a new user 
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- otherwise import DB file in config_files folder and use below credentials to login 
+    - email - test@gmail.com
+    - password - 1234
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## try run these commands if you run into any issues while setting up this project
 
-## Security Vulnerabilities
+- composer update --no-scripts
+- npm update vue-loader
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
